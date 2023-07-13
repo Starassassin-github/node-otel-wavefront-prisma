@@ -9,6 +9,9 @@ const { OTLPTraceExporter,} = require("@opentelemetry/exporter-trace-otlp-http")
 const { ExpressInstrumentation, } = require("opentelemetry-instrumentation-express");
 const { HttpInstrumentation } = require("@opentelemetry/instrumentation-http");
 const { registerInstrumentations } = require("@opentelemetry/instrumentation");
+const {
+  getNodeAutoInstrumentations,
+} = require("@opentelemetry/auto-instrumentations-node");
 
 const { diag, DiagConsoleLogger, DiagLogLevel } = require("@opentelemetry/api");
 
@@ -35,7 +38,7 @@ module.exports = (serviceName) => {
   provider.addSpanProcessor(new SimpleSpanProcessor(consoleExporter));
   provider.register();
   registerInstrumentations({
-    instrumentations: [new HttpInstrumentation(), new ExpressInstrumentation()],
+    instrumentations: [getNodeAutoInstrumentations()],
     tracerProvider: provider,
   });
   return trace.getTracer(serviceName);
