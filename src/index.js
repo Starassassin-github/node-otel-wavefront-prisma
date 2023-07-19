@@ -1,4 +1,4 @@
-const tracer = require("./tracing")("hello-world-service3");
+const tracer = require("./tracing")("hello-world-serviceEB");
 
 const express = require('express')
 const { PrismaClient } = require('@prisma/client')
@@ -14,6 +14,14 @@ app.get("/", (req, res) => {
 
 app.get("/hello", (req, res) => {
   res.send("Hello World!!!!!!");
+});
+
+app.post(`/test`, (req, res) => {
+  res.send('test METHOD:POST')
+});
+
+app.post(`/test/fail`, (req, res) => {
+  res.status(404).send('test : failed')
 });
 
 
