@@ -19,7 +19,7 @@ const {
 
 const exporter = new OTLPTraceExporter({
     // optional - default url is http://localhost:4318/v1/traces
-    url: "http://172.31.6.206:4330/v1/traces",
+    url: "http://172.31.12.83:4318/v1/traces",
     headers: {},
 });
 
